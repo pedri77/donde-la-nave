@@ -1,51 +1,81 @@
-# Plantilla: tu observatorio de datos públicos con IA
+# ¿Dónde pondrías tu nave?
 
-Plantilla gratuita de la serie **«Construido con IA»** de [IAcademy](https://iacedemy.com/free/yt/construido-con-ia/). Es la base mínima de proyectos como [Techo](https://pedri77.github.io/mapa-vivienda-espana/) (vivienda) y [Oferta Única](https://pedri77.github.io/oferta-unica/) (contratación pública).
+Todo el suelo industrial y comercial de **Arganda del Rey** (Madrid), medido desde datos abiertos
+y publicado en una web sin servidor: cuánto ocupa cada polígono, a qué distancia está de la vía
+rápida y del centro, y un ranking **que hace el lector** moviendo tres pesos con la fórmula a la
+vista. Episodio `cci-15` de la serie [«Construido con IA»](https://iacedemy.com/free/yt/construido-con-ia/)
+de IAcademy; recorte replicable del proyecto *Arganda Business Digital Twin*.
 
-Incluye un ejemplo que funciona desde el primer minuto: el **coste salarial por comunidad autónoma** se descarga cada día de la API del INE, se valida y se publica en un mapa con tabla. Gratis, sin servidores.
+- **Web:** <https://pedri77.github.io/donde-la-nave/>
+- **Fuente:** © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright) vía Overpass
+  API, instantánea del 2026-10-01. Licencia [ODbL 1.0](https://opendatacommons.org/licenses/odbl/).
 
-## Empieza en 5 minutos
+## Qué sale de los datos
 
-1. Pulsa **Use this template → Create a new repository** (público).
-2. En tu repositorio nuevo: **Settings → Pages → Source: GitHub Actions**.
-3. Ve a **Actions → Actualizar datos y publicar → Run workflow**.
-4. En un par de minutos tendrás la web en `https://TU-USUARIO.github.io/TU-REPO/`.
+| Métrica | Valor |
+|---|---:|
+| Término municipal | 79,93 km² |
+| Polígonos industriales (`landuse=industrial` / `man_made=works`) | 19 |
+| Polígonos comerciales (`landuse=commercial`) | 4 |
+| Suelo industrial | **544,96 ha, el 6,82 % del término** |
+| Suelo comercial | 4,75 ha |
+| Polígonos sin nombre en OSM | 13 de 23 |
+| Polígonos que cruzan el límite municipal | 3 (se cuentan enteros, marcados) |
 
-Se actualizará sola cada día a las 06:00 UTC.
+El mayor con diferencia es el **Polígono Industrial El Guija**: 314 ha, a 70 m de la N-IIIa. El
+siguiente, un recinto sin nombre de 90 ha. Los demás están entre 0,1 y 45 ha.
 
-## Adáptalo a tu pregunta
+## Cómo funciona el ranking
 
-| Paso | Qué hacer | Ayuda |
-|---|---|---|
-| 1 | Define tu pregunta, tu público y 3-5 fuentes oficiales | [datos.gob.es](https://datos.gob.es), [INE](https://www.ine.es), boletines oficiales |
-| 2 | Investiga con agentes que citan fuentes | `prompts/01-investigacion.md` |
-| 3 | Adapta `scripts/actualizar.py`: cambia `FUENTE`, `transformar()` y `validar()` | Comentarios en el propio script |
-| 4 | Verifica los datos | `prompts/02-verificacion.md` |
-| 5 | Ajusta `site/index.html` (título, unidad, colores) | — |
-| 6 | Revisa la web antes de publicar | `prompts/03-revision-visual.md` y `CHECKLIST.md` |
-
-## Estructura
+No hay un *business location score* escondido. Tres pesos (superficie, cercanía a vía rápida,
+cercanía al centro, de 0 a 10) y una fórmula escrita en la propia página:
 
 ```
-scripts/actualizar.py        descarga, transforma y valida → site/data.json
-site/index.html              mapa (Leaflet) + tabla ordenable, sin dependencias de build
-site/ccaa.geojson            límites de comunidades autónomas (es-atlas, IGN)
-.github/workflows/           actualización diaria y publicación en GitHub Pages
-prompts/                     los prompts usados en Techo y Oferta Única
-CHECKLIST.md                 lo que hay que revisar antes de publicar
+puntuación = (p_sup · superficie + p_via · cercanía_vía + p_cen · cercanía_centro) / (p_sup + p_via + p_cen)
 ```
 
-## En local
+Cada factor va a 0-1 entre el peor y el mejor de los 23 polígonos. La superficie entra en
+escala logarítmica para que El Guija no aplaste a los demás. Con los pesos cambia el orden:
+superficie a tope gana El Guija; centro a tope gana el Recinto Ferial. El peso del centro está a
+cero por defecto porque no es obvio que estar cerca del casco sea bueno para una nave.
+
+## Lo que NO se pudo medir (y se declara)
+
+- **Parcelas y uso catastral: sin dato.** Los servicios INSPIRE del Catastro no responden en
+  acceso anónimo (dominio aparcado, WAF «Request Rejected» y un 404, medido el 2026-10-01; evidencia
+  en `data/sources.json` y `raw/catastro_wfs_capabilities.xml`). Esta serie no usa claves.
+- **Empresas por polígono: no publicable.** OSM tiene 6 puntos de actividad empresarial en todo el
+  municipio; no es un censo. `densidad_empresas_fiable: false` en `data/agregados.json`.
+- **Tiempo de viaje: no.** La «accesibilidad» es distancia en línea recta del centroide al segmento
+  de vía rápida más cercano (A-3, R-3, M-506, N-IIIa) y al nodo `place=town`.
+
+## Reproducirlo, para cualquier municipio
 
 ```bash
-python3 scripts/actualizar.py
-python3 -m http.server -d site 8000   # abre http://localhost:8000
+python3 scripts/osm_fetch.py "Arganda del Rey"   # Overpass -> raw/osm/<municipio>.json (cachea)
+python3 scripts/osm_build.py "Arganda del Rey"   # -> data/agregados.json, poligonos.geojson, contexto.geojson
+cp data/*.json data/*.geojson site/data/          # la web lee de site/data/
 ```
 
-## Aprende a construirlo paso a paso
+Cambiar de municipio es cambiar el nombre. El mapa es un SVG propio (límite, vías rápidas y centro
+salen del mismo snapshot), así que la web no depende de teselas ni de ningún proveedor externo.
 
-El proyecto guiado de IAcademy lleva esta plantilla hasta un observatorio completo: varias fuentes, municipios, calculadora, vigilancia de fuentes con avisos y publicación responsable. [iacedemy.com](https://iacedemy.com/free/yt/construido-con-ia/?utm_source=github&utm_medium=plantilla&utm_campaign=construido-con-ia).
+## Trampas encontradas y cómo se tratan
 
-## Licencia
+1. **Recintos que cruzan el límite** (Centro Emisor RNE, way/28341750, Puente de Arganda): Overpass
+   devuelve por intersección; se cuentan enteros y se marcan, no se recortan a ojo.
+2. **Solapes**: tres recintos comerciales pequeños tienen el centroide dentro de El Guija; el doble
+   conteo posible es < 2 ha sobre 550. Declarado.
+3. **Umbral de ruido**: se descartan polígonos < 1.000 m² y ways sin anillo cerrado (0 en esta ejecución).
+4. **ODbL**: todo derivado de OSM, incluida la puntuación, hereda la licencia y la atribución.
 
-Código: MIT. Límites territoriales: [es-atlas](https://github.com/martgnz/es-atlas) (IGN). Datos del ejemplo: INE, reutilizables citando la fuente.
+## Verificación
+
+- Término medido 79,93 km² frente a 79,7 km² de las fichas municipales: < 0,4 % de desviación.
+- Tres polígonos comprobados contra su ficha pública de OSM (El Guija, Puente de Arganda, Coto Cisneros).
+- Método de área validado con un cuadrado de referencia (0,25 % esfera-plano).
+- Web probada en Chromium: 23 polígonos dibujados, 213 tramos de vía, pesos que reordenan, 0 errores.
+
+Informe completo de la medición: [`data/informe.md`](data/informe.md).
+
+Código bajo **MIT** (`LICENSE`). Los datos derivados, bajo ODbL.

@@ -1,8 +1,10 @@
-name: Actualizar datos y publicar
+name: Publicar en GitHub Pages
+
+# Este observatorio NO se regenera en CI: Overpass pide cortesía y el snapshot está fechado.
+# Para actualizar: python3 scripts/osm_fetch.py "Arganda del Rey" && python3 scripts/osm_build.py "Arganda del Rey",
+# copiar data/*.json y *.geojson a site/data/ y subir. Aquí solo se publica lo que hay en site/.
 
 on:
-  schedule:
-    - cron: "0 6 * * *"   # cada día a las 06:00 UTC
   push:
     branches: [main]
   workflow_dispatch:
@@ -27,8 +29,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Descargar y validar datos
-        run: python scripts/actualizar.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

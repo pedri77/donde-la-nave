@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "source": "este fichero",
+    "period": "2026-10-01",
+    "url": "-"
+  },
+  "fuentes": [
+    {
+      "nombre": "OpenStreetMap (vía Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "doc": "https://wiki.openstreetmap.org/wiki/ES:Overpass_API",
+      "formato": "JSON (out:json)",
+      "uso": "polígonos landuse=industrial/commercial y man_made=works, POIs de empresa, red viaria principal, límite municipal (relación admin_level=8)",
+      "licencia": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "obligaciones": "atribución «© OpenStreetMap contributors»; los derivados deben compartirse bajo ODbL (esto afecta al GeoJSON publicado: es un derivado de OSM)",
+      "credenciales": "ninguna (API pública)",
+      "periodo": "snapshot 2026-10-01 (timestamp_osm_base del raw)"
+    },
+    {
+      "nombre": "Catastro (Dirección General del Catastro) — servicios INSPIRE WFS/ATOM",
+      "url": "https://www1.sedecatastro.es/INSPIRE/",
+      "doc": "https://www.catastro.hacienda.gob.es/websinspire/index.html",
+      "formato": "WFS/ATOM (parcelas CP, addresses AD)",
+      "uso": "DESCARTADO",
+      "licencia": "condiciones de reutilización del Catastro (uso no comercial de los datos de referencia; ver aviso legal de sedecatastro)",
+      "credenciales": "no se han usado",
+      "nota": "inviable en anónimo el 2026-10-01: www1.sedecatastro.es responde con una página de parking de dominio; ovc.catastro.meh.es rechaza la petición (WAF «Request Rejected», soporte 10498739829322842722); catastro.hacienda.gob.es/INSPIRE/wfsCP.ashx devuelve 404. Evidencia en el informe. Por eso NO hay dato de número de parcelas por polígono ni de usos catastrales: no se inventa.",
+      "periodo": "-"
+    },
+    {
+      "nombre": "CNIG / IGN — límites municipales",
+      "url": "https://centrodedescargas.cnig.es/",
+      "doc": "https://api.ign.es/",
+      "formato": "WFS/WMTS",
+      "uso": "NO USADO",
+      "licencia": "condiciones de reutilización IGN (datos abiertos con atribución)",
+      "credenciales": "la API actual (api.ign.es) exige clave gratuita de usuario registrado",
+      "nota": "al exigir registro, se ha optado por el límite municipal equivalente de OSM (relación admin_level=8, misma geometría de origen). Verificación cruzada: 79,93 km² medidos vs ~79,7 km² publicados (desviación < 0,4 %).",
+      "periodo": "-"
+    }
+  ]
+}

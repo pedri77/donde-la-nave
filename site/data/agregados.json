@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "generado": "2026-10-01",
+    "municipio": "Arganda del Rey",
+    "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+    "url": "https://overpass-api.de/api/interpreter",
+    "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+    "attribution": "© OpenStreetMap contributors",
+    "period": "snapshot OSM 2026-10-01T12:11:01Z",
+    "notas": [
+      "Catastro INSPIRE (WFS/ATOM) descartado: los endpoints públicos (www1.sedecatastro.es y ovc.catastro.meh.es) no responden en modo anónimo (dominio aparcado y rechazo WAF «Request Rejected», medido 2026-10-01); catastro.hacienda.gob.es/INSPIRE devuelve 404. Sin credenciales no hay vía estable.",
+      "Límites municipales: tomados de la relación administrativa de OSM, no del CNIG/IGN (los servicios IGN actuales requieren clave de API gratuita, api.ign.es).",
+      "Overpass devuelve los elementos que INTERSECTAN el área: los polígonos que cruzan el límite aparecen completos; se marcan en cruce_limite y su superficie no se recorta.",
+      "Los POIs de empresa de OSM NO son un censo de empresas: son lo mapeado por la comunidad."
+    ]
+  },
+  "termino_municipal_m2": {
+    "valor": 79928239.7,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "m²",
+      "metodo": "suma de anillos exteriores (role=outer) de la relación admin_level=8, área esférica"
+    }
+  },
+  "poligonos_industriales": {
+    "valor": 19,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "count",
+      "criterio": "landuse=industrial o man_made=works en OSM, anillo cerrado, área ≥ 1.000 m²"
+    }
+  },
+  "poligonos_comerciales": {
+    "valor": 4,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "count",
+      "criterio": "landuse=commercial en OSM, anillo cerrado, área ≥ 1.000 m²"
+    }
+  },
+  "suelo_industrial_m2": {
+    "valor": 5449574.8,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "m²",
+      "nota": "suma sin recorte al término; ver cruce_limite"
+    }
+  },
+  "suelo_comercial_m2": {
+    "valor": 47472.8,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "m²"
+    }
+  },
+  "pct_suelo_industrial": {
+    "valor": 6.82,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "% del término",
+      "formula": "suelo_industrial_m2 / termino_municipal_m2"
+    }
+  },
+  "pct_suelo_comercial": {
+    "valor": 0.06,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "% del término"
+    }
+  },
+  "pois_empresa_municipio": {
+    "valor": 6,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "count",
+      "criterio": "nodos con man_made=works, office, industrial o craft"
+    }
+  },
+  "densidad_empresas_fiable": {
+    "valor": false,
+    "meta": {
+      "source": "criterio editorial",
+      "url": "-",
+      "license": "-",
+      "umbral": "≥ 50 POIs de empresa en el municipio",
+      "razon": "hay 6 POIs: OSM no es censo de empresas; no se publica 'empresas por polígono'"
+    }
+  },
+  "poligonos_que_cruzan_limite": {
+    "valor": 3,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "count",
+      "metodo": "vértices fuera del anillo municipal"
+    }
+  },
+  "pares_solapados": {
+    "valor": 3,
+    "meta": {
+      "source": "OpenStreetMap via Overpass API (overpass-api.de/api/interpreter)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL 1.0 (Open Data Commons Open Database License)",
+      "period": "snapshot OSM",
+      "unit": "count",
+      "metodo": "centroide de uno dentro del otro; riesgo de doble conteo en la suma",
+      "detalle": [
+        [
+          "way/632161017",
+          "relation/16125038"
+        ],
+        [
+          "way/632161019",
+          "relation/16125038"
+        ],
+        [
+          "way/632161021",
+          "relation/16125038"
+        ]
+      ]
+    }
+  },
+  "descartados": {
+    "valor": 0,
+    "meta": {
+      "source": "proceso de construcción",
+      "url": "-",
+      "license": "-",
+      "unit": "count",
+      "detalle": []
+    }
+  }
+}
