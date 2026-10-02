@@ -9,54 +9,70 @@
 <meta property="og:description" content="545 hectáreas de suelo industrial en 19 polígonos, el 6,8 % del término. Elige tus prioridades y el ranking se hace solo.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%23a3581c%27/%3E%3C/svg%3E">
 <style>
-  :root { --bg:#f6f4f0; --paper:#fff; --ink:#1d1a16; --ink-2:#645c52; --line:#dcd6cc; --accent:#a3581c;
-          --bar:#d9a878; --bar-hi:#a3581c; --warn:#b3382f; --ind:#a3581c; --com:#2f6f8f; --via:#8a8378; --lim:#1d1a16; color-scheme: light; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#16140f; --paper:#1e1b15; --ink:#f0ebe3; --ink-2:#aaa196; --line:#332e26; --accent:#e0a467; --bar:#6b4a2a; --bar-hi:#e0a467; --warn:#e0645a; --ind:#e0a467; --com:#6fb2d6; --via:#6c655b; --lim:#f0ebe3; color-scheme: dark; } }
+  :root { --bg:#f6f4f0; --paper:#fff; --ink:#1d1a16; --ink-2:#645c52; --line:#dcd6cc; --accent:#a3581c; --accent-ink:#7c3f12;
+          --hero:#f3e9db; --warn:#b3382f; --ind:#a3581c; --com:#2b7fd1; --via:#8a8378; --lim:#1d1a16;
+          --t1:#a3581c; --t2:#c98a4e; --t3:#2b7fd1; --t4:#8b5cf6; --t5:#3d8f5f; --t6:#d9488a; --t7:#8a8378;
+          --on-bar:#fff; --r:12px; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#16140f; --paper:#1e1b15; --ink:#f0ebe3; --ink-2:#aaa196; --line:#332e26; --accent:#e0a467; --accent-ink:#eec296;
+          --hero:#2a2013; --warn:#e0645a; --ind:#e0a467; --com:#5fa3ea; --via:#6c655b; --lim:#f0ebe3;
+          --t1:#e0a467; --t2:#eec296; --t3:#5fa3ea; --t4:#a78bfa; --t5:#6fcf9a; --t6:#ef7fb0; --t7:#6c655b; --on-bar:#16140f; color-scheme: dark; } }
   * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
   body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
   .wrap { max-width:1100px; margin:0 auto; padding:24px 20px 60px; }
-  h1 { font-size:clamp(1.9rem,4vw,3rem); line-height:1.08; margin:10px 0; letter-spacing:-.02em; }
-  h2 { font-size:1.35rem; margin:38px 0 6px; }
-  .lede { color:var(--ink-2); max-width:66ch; font-size:1.05rem; }
-  .eyebrow { font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); font-weight:700; margin:0; }
-  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin:26px 0 10px; }
-  .kpi { background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:16px; }
-  .kpi b { display:block; font-size:1.9rem; font-weight:800; line-height:1.1; font-variant-numeric:tabular-nums; }
+  h1 { font-size:clamp(2.2rem,5vw,3.6rem); line-height:1.02; margin:8px 0 14px; letter-spacing:-.03em; font-weight:800; }
+  h2 { font-size:1.45rem; margin:46px 0 8px; letter-spacing:-.015em; padding-left:14px; border-left:4px solid var(--sec,var(--accent)); line-height:1.2; }
+  .lede { color:var(--ink-2); max-width:62ch; font-size:1.08rem; margin:0; }
+  .eyebrow { font-size:.76rem; text-transform:uppercase; letter-spacing:.09em; color:var(--accent-ink); font-weight:700; margin:0; }
+  .hero { display:grid; grid-template-columns:1.25fr .9fr; gap:28px; align-items:center; background:linear-gradient(135deg,var(--hero),var(--paper) 70%); border:1px solid var(--line); border-radius:var(--r); padding:30px 32px; margin-bottom:8px; }
+  .hero-num { text-align:right; }
+  .hero-num b { display:block; font-size:clamp(3rem,7vw,5.2rem); font-weight:900; letter-spacing:-.04em; line-height:.95; color:var(--accent); font-variant-numeric:tabular-nums; }
+  .hero-num span { display:block; color:var(--ink-2); font-size:1rem; }
+  @media (max-width:760px) { .hero { grid-template-columns:1fr; } .hero-num { text-align:left; } }
+  .sec-com { --sec:var(--com); } .sec-violeta { --sec:var(--t4); } .sec-verde { --sec:var(--t5); } .sec-gris { --sec:var(--via); }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin:22px 0 10px; }
+  .kpi { background:var(--paper); border:1px solid var(--line); border-top:4px solid var(--sec,var(--accent)); border-radius:var(--r); padding:16px; }
+  .kpi b { display:block; font-size:1.95rem; font-weight:800; line-height:1.1; font-variant-numeric:tabular-nums; letter-spacing:-.02em; color:var(--sec,var(--accent)); }
   .kpi span { color:var(--ink-2); font-size:.9rem; }
-  .card { background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:16px; overflow-x:auto; margin-top:12px; }
-  .aviso { border-left:3px solid var(--accent); padding:10px 14px; background:var(--paper); border-radius:0 8px 8px 0; margin:18px 0; }
-  .aviso.warn { border-left-color:var(--warn); }
+  .card { background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:18px; overflow-x:auto; margin-top:12px; }
+  .aviso { border-left:4px solid var(--accent); padding:12px 16px; background:var(--paper); border-radius:0 var(--r) var(--r) 0; margin:18px 0; }
+  .aviso.warn { border-left-color:var(--warn); background:color-mix(in srgb, var(--warn) 7%, var(--paper)); }
   .nota { font-size:.87rem; color:var(--ink-2); margin-top:10px; }
-  a { color:var(--accent); }
+  a { color:var(--accent-ink); }
   svg { width:100%; height:auto; display:block; }
   table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:.92rem; }
-  th,td { padding:8px 10px; border-bottom:1px solid var(--line); text-align:left; }
+  th,td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; }
+  tbody tr:hover td, tr.hi td { background:color-mix(in srgb, var(--accent) 8%, transparent); }
   td.r, th.r { text-align:right; }
-  th { font-size:.73rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-2); cursor:pointer; user-select:none; }
-  tr.hi td { background:color-mix(in srgb, var(--accent) 14%, transparent); }
+  th { font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-2); cursor:pointer; user-select:none; }
   .bar { position:relative; }
-  .bar i { position:absolute; inset:0 auto 0 0; background:var(--bar); opacity:.35; border-radius:3px; }
+  .bar i { position:absolute; inset:0 auto 0 0; background:var(--accent); opacity:.18; border-radius:4px; }
   .bar span { position:relative; }
+  .chip { display:inline-block; font-size:.74rem; font-weight:600; padding:2px 9px; border-radius:999px; color:var(--on-bar); white-space:nowrap; }
+  .tag { display:inline-block; font-size:.72rem; padding:1px 7px; border-radius:999px; border:1px solid var(--line); color:var(--ink-2); margin-left:6px; vertical-align:middle; white-space:nowrap; }
   .pesos { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px 24px; margin:6px 0 4px; }
   .pesos label { display:block; font-size:.92rem; }
-  .pesos label b { display:flex; justify-content:space-between; font-weight:600; }
-  .pesos input[type=range] { width:100%; accent-color:var(--accent); }
-  .pesos small { color:var(--ink-2); }
-  .leyenda { display:flex; flex-wrap:wrap; gap:14px; font-size:.85rem; color:var(--ink-2); margin-top:8px; }
-  .leyenda i { display:inline-block; width:14px; height:14px; border-radius:3px; vertical-align:-2px; margin-right:5px; }
+  .pesos label b { display:flex; justify-content:space-between; align-items:center; font-weight:600; gap:8px; min-width:0; }
+  .pesos input[type=range] { width:100%; margin:0; accent-color:var(--accent); }
+  .pesos small { display:block; color:var(--ink-2); overflow-wrap:anywhere; }
+  .leyenda { display:flex; flex-wrap:wrap; gap:14px 18px; font-size:.85rem; color:var(--ink-2); margin-top:10px; }
+  .leyenda i { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; }
   .mapa path.pol { cursor:pointer; transition:fill-opacity .15s; }
   .mapa text { paint-order:stroke; stroke:var(--paper); stroke-width:3px; stroke-linejoin:round; }
   .mapa path.pol:hover, .mapa path.pol.hi { fill-opacity:.95; stroke-width:2; }
-  .tag { display:inline-block; font-size:.72rem; padding:1px 7px; border-radius:999px; border:1px solid var(--line); color:var(--ink-2); margin-left:6px; vertical-align:middle; }
-  footer { margin-top:44px; border-top:1px solid var(--line); padding-top:16px; font-size:.87rem; color:var(--ink-2); }
+  footer { margin-top:48px; border-top:1px solid var(--line); padding-top:18px; font-size:.87rem; color:var(--ink-2); }
   code { background:var(--bg); padding:1px 5px; border-radius:4px; font-size:.85em; }
+  @media (prefers-reduced-motion: no-preference) { .kpi, .card { transition:transform .15s ease; } }
 </style>
 </head>
-<body>
-<div class="wrap">
-  <p class="eyebrow">Construido con IA · Episodio 15 · Arganda del Rey (Madrid)</p>
-  <h1>¿Dónde pondrías tu nave?</h1>
-  <p class="lede">Todo el suelo industrial y comercial de un municipio, medido desde datos abiertos: cuánto ocupa cada polígono, a qué distancia está de la autovía y del centro. Sin puntuación mágica: <strong>eliges tú qué pesa</strong> y el ranking se hace solo, con la fórmula a la vista.</p>
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Construido con IA · Episodio 15 · Arganda del Rey (Madrid)</p>
+      <h1>¿Dónde pondrías tu nave?</h1>
+      <p class="lede">Todo el suelo industrial y comercial de un municipio, medido desde datos abiertos: cuánto ocupa cada polígono, a qué distancia está de la autovía y del centro. Sin puntuación mágica: <strong>eliges tú qué pesa</strong> y el ranking se hace solo, con la fórmula a la vista.</p>
+    </div>
+    <div class="hero-num"><b id="hero-num"></b><span id="hero-sub"></span></div>
+  </div>
 
   <div class="kpis" id="kpis"></div>
   <p class="nota" id="nota-kpis"></p>
@@ -65,7 +81,7 @@
     <strong>Qué es y qué no es este mapa.</strong> Los polígonos son los recintos etiquetados como suelo industrial o comercial en OpenStreetMap, no el planeamiento oficial ni el Catastro. La «accesibilidad» es distancia en línea recta, no tiempo de viaje. Y no hay número de empresas ni de parcelas: esas fuentes no están abiertas y aquí no se inventan. Lo que falta está explicado al final.
   </div>
 
-  <h2>El mapa</h2>
+<h2 class="sec-com">El mapa</h2>
   <div class="card"><svg id="mapa" class="mapa" role="img" aria-label="Mapa de Arganda del Rey con sus polígonos industriales y comerciales, vías rápidas y centro urbano"></svg>
     <div class="leyenda"><span><i style="background:var(--ind)"></i>Suelo industrial</span><span><i style="background:var(--com)"></i>Suelo comercial</span><span><i style="background:var(--via);height:3px;vertical-align:3px"></i>Vía rápida (A-3, R-3, M-506, N-IIIa)</span><span><i style="background:var(--lim);border-radius:50%"></i>Centro urbano</span></div>
   </div>
@@ -74,18 +90,18 @@
   <h2>Tú decides qué pesa</h2>
   <div class="card">
     <div class="pesos">
-      <label><b>Superficie <span id="v-sup"></span></b><input type="range" id="p-sup" min="0" max="10" value="5"><small>Cuanto más grande el polígono, mejor.</small></label>
-      <label><b>Cerca de la vía rápida <span id="v-via"></span></b><input type="range" id="p-via" min="0" max="10" value="5"><small>Menos distancia a la A-3, R-3, M-506 o N-IIIa.</small></label>
-      <label><b>Cerca del centro <span id="v-cen"></span></b><input type="range" id="p-cen" min="0" max="10" value="0"><small>Menos distancia al núcleo urbano (a 0 por defecto: no es obvio que sea bueno).</small></label>
+      <label><b>Superficie <span id="v-sup" class="chip" style="background:var(--accent)"></span></b><input type="range" id="p-sup" min="0" max="10" value="5"><small>Cuanto más grande el polígono, mejor.</small></label>
+      <label><b>Cerca de la vía rápida <span id="v-via" class="chip" style="background:var(--accent)"></span></b><input type="range" id="p-via" min="0" max="10" value="5"><small>Menos distancia a la A-3, R-3, M-506 o N-IIIa.</small></label>
+      <label><b>Cerca del centro <span id="v-cen" class="chip" style="background:var(--accent)"></span></b><input type="range" id="p-cen" min="0" max="10" value="0"><small>Menos distancia al núcleo urbano (a 0 por defecto: no es obvio que sea bueno).</small></label>
     </div>
     <p class="nota" id="formula"></p>
   </div>
 
-  <h2>Los 23 polígonos, con tu orden</h2>
+<h2 class="sec-violeta">Los 23 polígonos, con tu orden</h2>
   <div class="card"><table id="t-pol"></table></div>
   <p class="nota">La columna «tu puntuación» va de 0 a 100 y sale solo de los tres pesos de arriba. Ordena por cualquier columna haciendo clic en la cabecera. «Sin nombre» significa que en OpenStreetMap el recinto está dibujado pero nadie le ha puesto nombre: 13 de 23.</p>
 
-  <h2>Lo que no se pudo medir, y por qué</h2>
+<h2 class="sec-gris">Lo que no se pudo medir, y por qué</h2>
   <div class="card">
     <p style="margin-top:0"><strong>Parcelas y uso catastral: sin dato.</strong> El Catastro es la única fuente de parcelas, y sus servicios INSPIRE públicos no respondían en acceso anónimo el 1 de octubre de 2026 (un dominio aparcado, un cortafuegos que rechaza la petición y un 404; está documentado en <code>data/sources.json</code>). Sin clave no hay vía estable, y esta serie no usa claves.</p>
     <p><strong>Empresas por polígono: no publicable.</strong> OpenStreetMap tiene 6 puntos de actividad empresarial en todo el municipio. No es un censo, es lo que la comunidad ha mapeado; la fuente real (DIRCE del INE o licencias municipales) no está abierta a nivel de polígono. Por eso aquí no hay «concentración sectorial».</p>
@@ -121,6 +137,8 @@ $('#kpis').innerHTML = [
   [N(haInd, 2) + ' ha', `de suelo industrial: el ${N(100 * haInd * 1e4 / AGG.termino_municipal_m2.valor, 2)} % del término`],
   [N(AGG.poligonos_comerciales.valor), `polígonos comerciales (${N(haCom, 1)} ha)`],
 ].map(([b, s]) => `<div class="kpi"><b>${b}</b><span>${s}</span></div>`).join('');
+$('#hero-num').textContent = N(haInd, 2);
+$('#hero-sub').textContent = `hectáreas de suelo industrial: el ${N(100 * haInd * 1e4 / AGG.termino_municipal_m2.valor, 2)} % del término, más ${N(haCom, 1)} ha comerciales`;
 $('#nota-kpis').textContent = `Cuenta polígonos, no parcelas ni naves. Tres recintos cruzan el límite municipal y se cuentan enteros; tres recintos comerciales pequeños están dentro de El Guija, así que la suma puede contar menos de 2 hectáreas dos veces. Se declara en vez de corregirlo a ojo.`;
 $('#snap').textContent = (POL.metadata?.period || AGG.meta.period || '').replace('snapshot OSM ', '').slice(0, 10);
 
@@ -193,7 +211,7 @@ function puntua() {
 let orden = { key: 'punt', dir: -1 };
 const cols = [
   { k: 'nombre', t: 'Polígono', get: (f) => f.nombre || `~${f.id}`, v: (f) => (f.nombre ? esc(f.nombre) : `<span style="color:var(--ink-2)">Sin nombre</span> <span class="tag">${esc(f.id)}</span>`) + (f.cruza_limite ? '<span class="tag" title="El recinto sigue fuera del término; se cuenta entero">cruza el límite</span>' : '') },
-  { k: 'uso', t: 'Uso', get: (f) => f.uso, v: (f) => f.uso === 'industrial' ? 'Industrial' : 'Comercial' },
+  { k: 'uso', t: 'Uso', get: (f) => f.uso, v: (f) => `<span class="chip" style="background:var(${f.uso === 'industrial' ? '--ind' : '--com'})">${f.uso === 'industrial' ? 'Industrial' : 'Comercial'}</span>` },
   { k: 'ha', t: 'Hectáreas', r: 1, bar: 1, get: (f) => f.ha, v: (f) => N(f.ha, 2) },
   { k: 'kmVia', t: 'Km a vía rápida', r: 1, get: (f) => f.kmVia, v: (f) => `${N(f.kmVia, 2)} <span class="tag">${esc(f.via_rapida)}</span>` },
   { k: 'kmCen', t: 'Km al centro', r: 1, get: (f) => f.kmCen, v: (f) => N(f.kmCen, 2) },
