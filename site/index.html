@@ -139,7 +139,7 @@ $('#kpis').innerHTML = [
 ].map(([b, s]) => `<div class="kpi"><b>${b}</b><span>${s}</span></div>`).join('');
 $('#hero-num').textContent = N(haInd, 2);
 $('#hero-sub').textContent = `hectáreas de suelo industrial: el ${N(100 * haInd * 1e4 / AGG.termino_municipal_m2.valor, 2)} % del término, más ${N(haCom, 1)} ha comerciales`;
-$('#nota-kpis').textContent = `Cuenta polígonos, no parcelas ni naves. Tres recintos cruzan el límite municipal y se cuentan enteros; tres recintos comerciales pequeños están dentro de El Guija, así que la suma puede contar menos de 2 hectáreas dos veces. Se declara en vez de corregirlo a ojo.`;
+$('#nota-kpis').textContent = `Cuenta polígonos, no parcelas ni naves. Tres recintos cruzan el límite municipal y se cuentan enteros; tres recintos comerciales pequeños están dentro de El Guijar, así que la suma puede contar menos de 2 hectáreas dos veces. Se declara en vez de corregirlo a ojo.`;
 $('#snap').textContent = (POL.metadata?.period || AGG.meta.period || '').replace('snapshot OSM ', '').slice(0, 10);
 
 // --- mapa SVG: proyección equirrectangular escalada por cos(latitud) ------------------------
@@ -203,7 +203,7 @@ function puntua() {
   $('#v-sup').textContent = ps; $('#v-via').textContent = pv; $('#v-cen').textContent = pc;
   filas.forEach((f, i) => { f.punt = tot ? 100 * (ps * nSup[i] + pv * nVia[i] + pc * nCen[i]) / tot : 0; });
   $('#formula').innerHTML = tot
-    ? `<strong>La fórmula, sin truco:</strong> puntuación = (${ps} × superficie + ${pv} × cercanía a vía + ${pc} × cercanía al centro) ÷ ${tot}, con cada factor llevado a 0-1 entre el peor y el mejor de los 23. La superficie entra en escala logarítmica para que El Guija (314 ha) no aplaste a todos los demás. Cambia los pesos y cambia el orden: es tu criterio, no el nuestro.`
+    ? `<strong>La fórmula, sin truco:</strong> puntuación = (${ps} × superficie + ${pv} × cercanía a vía + ${pc} × cercanía al centro) ÷ ${tot}, con cada factor llevado a 0-1 entre el peor y el mejor de los 23. La superficie entra en escala logarítmica para que El Guijar (314 ha) no aplaste a todos los demás. Cambia los pesos y cambia el orden: es tu criterio, no el nuestro.`
     : `Con los tres pesos a cero no hay puntuación: todos los polígonos valen 0. Sube alguno.`;
   pintaTabla();
 }

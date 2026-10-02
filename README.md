@@ -22,7 +22,7 @@ de IAcademy; recorte replicable del proyecto *Arganda Business Digital Twin*.
 | Polígonos sin nombre en OSM | 13 de 23 |
 | Polígonos que cruzan el límite municipal | 3 (se cuentan enteros, marcados) |
 
-El mayor con diferencia es el **Polígono Industrial El Guija**: 314 ha, a 70 m de la N-IIIa. El
+El mayor con diferencia es el **Polígono Industrial El Guijar**: 314 ha, a 70 m de la N-IIIa. El
 siguiente, un recinto sin nombre de 90 ha. Los demás están entre 0,1 y 45 ha.
 
 ## Cómo funciona el ranking
@@ -35,8 +35,8 @@ puntuación = (p_sup · superficie + p_via · cercanía_vía + p_cen · cercaní
 ```
 
 Cada factor va a 0-1 entre el peor y el mejor de los 23 polígonos. La superficie entra en
-escala logarítmica para que El Guija no aplaste a los demás. Con los pesos cambia el orden:
-superficie a tope gana El Guija; centro a tope gana el Recinto Ferial. El peso del centro está a
+escala logarítmica para que El Guijar no aplaste a los demás. Con los pesos cambia el orden:
+superficie a tope gana El Guijar; centro a tope gana el Recinto Ferial. El peso del centro está a
 cero por defecto porque no es obvio que estar cerca del casco sea bueno para una nave.
 
 ## Lo que NO se pudo medir (y se declara)
@@ -64,15 +64,16 @@ salen del mismo snapshot), así que la web no depende de teselas ni de ningún p
 
 1. **Recintos que cruzan el límite** (Centro Emisor RNE, way/28341750, Puente de Arganda): Overpass
    devuelve por intersección; se cuentan enteros y se marcan, no se recortan a ojo.
-2. **Solapes**: tres recintos comerciales pequeños tienen el centroide dentro de El Guija; el doble
+2. **Solapes**: tres recintos comerciales pequeños tienen el centroide dentro de El Guijar; el doble
    conteo posible es < 2 ha sobre 550. Declarado.
 3. **Umbral de ruido**: se descartan polígonos < 1.000 m² y ways sin anillo cerrado (0 en esta ejecución).
-4. **ODbL**: todo derivado de OSM, incluida la puntuación, hereda la licencia y la atribución.
+4. **Errata en OSM**: el polígono está etiquetado «El Guija»; el nombre real es **El Guijar**. Se corrige en el build (`CORRECCIONES_NOMBRE`) y se conserva el original en `nombre_osm`.
+5. **ODbL**: todo derivado de OSM, incluida la puntuación, hereda la licencia y la atribución.
 
 ## Verificación
 
 - Término medido 79,93 km² frente a 79,7 km² de las fichas municipales: < 0,4 % de desviación.
-- Tres polígonos comprobados contra su ficha pública de OSM (El Guija, Puente de Arganda, Coto Cisneros).
+- Tres polígonos comprobados contra su ficha pública de OSM (El Guijar, Puente de Arganda, Coto Cisneros).
 - Método de área validado con un cuadrado de referencia (0,25 % esfera-plano).
 - Web probada en Chromium: 23 polígonos dibujados, 213 tramos de vía, pesos que reordenan, 0 errores.
 

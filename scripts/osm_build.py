@@ -152,6 +152,12 @@ def anillos_relation(rel):
     return coser_anillos(tramos)
 
 
+# Erratas conocidas en OSM. Se corrige el nombre mostrado y se conserva el original en `nombre_osm`.
+CORRECCIONES_NOMBRE = {
+    "Polígono Industrial El Guija": "Polígono Industrial El Guijar",  # nombre oficial del polígono de Arganda (OSM lo tiene sin la r)
+}
+
+
 def main(nombre: str) -> None:
     clave = nombre.lower().replace(" ", "_")
     datos = json.loads((RAW / f"{clave}.json").read_text())
@@ -222,7 +228,8 @@ def main(nombre: str) -> None:
                           if punto_en_poligonos((p["lon"], p["lat"]), anillos))
         poligonos.append({
             "id": pid,
-            "nombre": tg.get("name"),
+            "nombre": CORRECCIONES_NOMBRE.get(tg.get("name"), tg.get("name")),
+            "nombre_osm": tg.get("name"),
             "uso": uso,
             "area_m2": round(area, 1),
             "vertices_fuera_termino": fuera,

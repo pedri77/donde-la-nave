@@ -30,7 +30,7 @@ Superficie (ha), distancia del centroide a la vía rápida más cercana
 
 | Polígono | Uso | ha | Vía rápida | km a vía | km a centro |
 |---|---|---|---|---|---|
-| Polígono Industrial El Guija (relation/16125038) | ind | 314,07 | N-IIIa | 0,07 | 2,91 |
+| Polígono Industrial El Guijar (relation/16125038) | ind | 314,07 | N-IIIa | 0,07 | 2,91 |
 | way/1191938484 (sin nombre) | ind | 90,20 | N-IIIa | 1,08 | 3,03 |
 | Centro Emisor Onda Corta RNE (way/344600814) | ind | 44,71 | A-3 | 0,53 | 6,06 |
 | way/1234484928 (sin nombre) | ind | 26,00 | N-IIIa | 0,27 | 3,46 |
@@ -63,7 +63,7 @@ puntuación. Un polígono grande no es «mejor» que uno pequeño. El lector dec
 
 En todo el término municipal OSM tiene **6 nodos** de empresa/actividad
 (office, craft, man_made=works, industrial). 4 caen dentro de algún polígono
-(3 en El Guija, 1 en way/1191938484). Con 6 POIs no existe dato fiable de
+(3 en El Guijar, 1 en way/1191938484). Con 6 POIs no existe dato fiable de
 densidad de empresas: OSM no es un censo de empresas, es lo que la comunidad
 ha mapeado. Se declara `densidad_empresas_fiable: false` en
 `data/agregados.json` y no se publica ninguna cifra de empresas por polígono.
@@ -98,7 +98,7 @@ claves).
    Están marcados con `cruza_limite: true` en el GeoJSON.
 2. **Solapamientos / doble conteo (3 pares):** way/632161017, way/632161019 y
    way/632161021 (tres polígonos comerciales junto a la N-IIIa) tienen su
-   centroide dentro de El Guija. La suma total puede contarlos dos veces;
+   centroide dentro de El Guijar\. La suma total puede contarlos dos veces;
    orden de magnitud del solape: < 2 ha sobre 550 ha.
 3. **Sin duplicados OSM↔Catastro que resolver:** al no haber dato catastral,
    el cruce no existe; se declara en vez de presuponerlo.
@@ -115,10 +115,11 @@ claves).
 Tres polígonos comprobados contra la ficha pública de OSM (mismo origen, pero
 comprobación visual de que la geometría y las etiquetas son las que dicen ser):
 
-- **Polígono Industrial El Guija** — https://www.openstreetmap.org/relation/16125038
+- **Polígono Industrial El Guijar** — https://www.openstreetmap.org/relation/16125038
+  OSM lo etiqueta «El Guija» (errata): el nombre oficial es **El Guijar**; el build lo corrige y guarda el original en `nombre_osm`.
   Etiquetado landuse=industrial con nombre; ocupa la vega al noreste del
   casco, entre la N-IIIa y el ferrocarril. Coincide con la zona industrial
-  conocida de El Guija; en el mapa base de OSM se ve el recinto completo.
+  conocida de El Guijar; en el mapa base de OSM se ve el recinto completo.
 - **Polígono Industrial Puente de Arganda** — https://www.openstreetmap.org/way/30111153
   Recinto pequeño pegado a la A-3 al sureste del casco (0,09 km del centroide
   a la autovía, coherente con un polígono que bordea la carretera); es uno de
